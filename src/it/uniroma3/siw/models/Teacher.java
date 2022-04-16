@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,11 @@ public class Teacher {
 	@Column(nullable = false)
 	private String vatNumber;
 	
-	@OneToMany(mappedBy="lecturer")
+	/*
+	 * Strategia Lazy perché si tratta di una collezione potenzialmente numerosa, e non è una composizione, quindi potrebbe non essere richiesto consultarlo
+	 * Inoltre, non essendo una composizione, non metto nemmeno il cascade su persist e merge.
+	 */
+	@OneToMany(mappedBy="lecturer",fetch = FetchType.LAZY)
 	@Column(nullable = false)
 	private List<Course> coursesHeld;
 	

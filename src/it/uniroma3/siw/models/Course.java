@@ -3,7 +3,9 @@ package it.uniroma3.siw.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,11 +24,19 @@ public class Course {
 	@Column(nullable = false)
 	private Integer courseLengthInMonths;
 	
-	@ManyToOne
+	/*
+	 * Strategia EAGER perché si tratta di una ManyToOne, e recuperare una istanza di un singolo oggetto non è costoso e ne vale la pena
+	 * Cascade per il persist, perché così quando memorizzo un corso, memorizzo direttamente anche il docente
+	 */
+	@ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST})
 	@Column(nullable = false)
 	private Teacher lecturer;
 	
-	@ManyToMany(mappedBy="attendedCourses")
+	/*
+	 * Strategia Lazy perché si tratta di una collezione potenzialmente numerosa, e non è una composizione, quindi potrebbe non essere richiesto consultarlo
+	 * Inoltre, non essendo una composizione, non metto nemmeno il cascade su persist e merge.
+	 */
+	@ManyToMany(mappedBy="attendedCourses",fetch = FetchType.LAZY)
 	@Column(nullable = false)
 	private List<Student> attendingStudents;
 	

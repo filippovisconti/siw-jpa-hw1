@@ -1,9 +1,11 @@
 package it.uniroma3.siw.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 public class Company {
 
@@ -14,6 +16,7 @@ public class Company {
 	@Column(nullable = false)
 	private String businessName;
 	
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	@Column(nullable = false)
 	private Address businessAddress;
 	
