@@ -38,7 +38,7 @@ public class Main {
 		Query deleteAllCourses = em.createQuery("DELETE FROM Course c");
 		tx = em.getTransaction();
 		tx.begin();
-		deleteAllCompanies.executeUpdate();
+		deleteAllCourses.executeUpdate();
 		tx.commit();
 
 		// Test persistence
