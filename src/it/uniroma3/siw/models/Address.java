@@ -9,6 +9,14 @@ import javax.persistence.Id;
 @Entity
 public class Address {
 	
+	public Address(String streetName, String streetNumber, String city, String province, String zipCode) {
+		super();
+		this.streetName = streetName;
+		this.streetNumber = streetNumber;
+		this.city = city;
+		this.province = province;
+		this.zipCode = zipCode;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
