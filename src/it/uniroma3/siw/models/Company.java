@@ -22,6 +22,17 @@ public class Company {
 	
 	@Column(nullable = false)
 	private String phoneNumber;
+	
+	@Column(nullable = false)
+	private String vatNumber;
+	
+	public String getVatNumber() {
+		return vatNumber;
+	}
+
+	public void setVatNumber(String vatNumber) {
+		this.vatNumber = vatNumber;
+	}
 
 	public Long getId() {
 		return id;
