@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +42,6 @@ public class Student {
 	 * Cascade per il persist, perché così quando memorizzo un impiegato, memorizzo direttamente anche il datore di lavoro
 	 */
 	@OneToOne(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST})
-	@Column(nullable = false)
 	private Company employer;
 	
 	/*
@@ -48,7 +49,6 @@ public class Student {
 	 * Inoltre, non essendo una composizione, non metto nemmeno il cascade su persist e merge.
 	 */
 	@ManyToMany(fetch = FetchType.LAZY)
-	@Column(nullable = false)
 	private List<Course> attendedCourses;
 
 	public Long getId() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Course {
 	
 	@Id
@@ -29,7 +31,6 @@ public class Course {
 	 * Cascade per il persist, perché così quando memorizzo un corso, memorizzo direttamente anche il docente
 	 */
 	@ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST})
-	@Column(nullable = false)
 	private Teacher lecturer;
 	
 	/*
@@ -37,7 +38,6 @@ public class Course {
 	 * Inoltre, non essendo una composizione, non metto nemmeno il cascade su persist e merge.
 	 */
 	@ManyToMany(mappedBy="attendedCourses",fetch = FetchType.LAZY)
-	@Column(nullable = false)
 	private List<Student> attendingStudents;
 	
 	public Long getId() {
